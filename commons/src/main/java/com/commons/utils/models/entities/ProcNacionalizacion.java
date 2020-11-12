@@ -54,9 +54,8 @@ public class ProcNacionalizacion implements Serializable {
    @Column(name = "sDomicilio", length = 300)
    private String domicilio;
 
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdDistrito")
-   private Distrito distrito;
+   @Column(name = "sDistrito", nullable = true)
+   private String distrito;
 
    @Column(name = "sCorreo", length = 55, nullable = false)
    private String correo;
