@@ -1,39 +1,37 @@
 package com.commons.utils.models.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
 @Table(name = "SidtefimUsuario")
 @Data
-@EqualsAndHashCode(of = { "sLogin" })
+@EqualsAndHashCode(of = { "login" })
 public class Usuario implements Serializable {
 
    @Id
-   private String sLogin;
-   private String xPassword;
-   private String sNombre;
-   private String sSiglas;
+   @Column(name = "sLogin")
+   private String login;
 
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdDependencia")
-   private Dependencia dependencia;
+   @Column(name = "xPassword", nullable = false)
+   private String password;
 
-   private String sGrupoControl;
-   private String sCodigoArea;
+   @Column(name = "sNombre", nullable = false)
+   private String nombre;
 
-   @Column(length = 8)
-   private int sDni;
+   @Column(name = "sIdDependencia", nullable = false)
+   private String dependencia;
+
+   @Column(name = "sCodigoArea", nullable = false)
+   private String codigoArea;
+
+   @Column(name = "sDni", length = 8, nullable = false)
+   private String dni;
 
    /**
     *

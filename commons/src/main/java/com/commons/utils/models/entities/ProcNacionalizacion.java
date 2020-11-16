@@ -2,6 +2,8 @@ package com.commons.utils.models.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,10 +12,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,11 +33,15 @@ public class ProcNacionalizacion implements Serializable {
    @Column(name = "nIdProcNac")
    private Long idProcNac;
 
+   @JsonIgnoreProperties({ "procNac" })
+   @OneToMany(mappedBy = "procNac", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   private List<EtapaProcNacionalizacion> etapasProcNacionalizacion;
+
    @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdDocumento")
+   @JoinColumn(name = "nIdDocumento", nullable = true)
    private Documento documento;
 
-   @Column(name = "sNumeroDocumento")
+   @Column(name = "sNumeroDocumento", nullable = true)
    private String sNumeroDocumento;
 
    @Column(name = "sNumeroTramite", length = 15, nullable = false)
@@ -41,17 +49,17 @@ public class ProcNacionalizacion implements Serializable {
 
    @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern = "dd-MM-yyyy")
-   @Column(name = "dFechaInicioTramite")
+   @Column(name = "dFechaInicioTramite", nullable = true)
    private Date fechaInicioTramite;
 
-   @Column(length = 55)
-   private String sAdministrado;
+   @Column(name = "sAdministrado", length = 55, nullable = true)
+   private String administrado;
 
    @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdNacionalidad")
+   @JoinColumn(name = "sIdNacionalidad", nullable = true)
    private Pais nacionalidad;
 
-   @Column(name = "sDomicilio", length = 300)
+   @Column(name = "sDomicilio", length = 300, nullable = true)
    private String domicilio;
 
    @Column(name = "sDistrito", nullable = true)
@@ -64,11 +72,11 @@ public class ProcNacionalizacion implements Serializable {
    private Long telefono;
 
    @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdTipoSolicitud")
+   @JoinColumn(name = "sIdTipoSolicitud", nullable = false)
    private TipoSolicitud tipoSolicitud;
 
    @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdTipoTramite")
+   @JoinColumn(name = "sIdTipoTramite", nullable = false)
    private TipoTramite tipoTramite;
 
    @Temporal(TemporalType.TIMESTAMP)
@@ -85,7 +93,7 @@ public class ProcNacionalizacion implements Serializable {
    private Date fechaAsignacionTramite;
 
    @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sEstadoActual")
+   @JoinColumn(name = "sEstadoActual", nullable = false)
    private Estado estadoActual;
 
    @ManyToOne(fetch = FetchType.EAGER)
@@ -98,6 +106,12 @@ public class ProcNacionalizacion implements Serializable {
    @PrePersist
    private void prePersist() {
       this.fechaRegistro = new Date();
+      this.completo = false;
+   }
+
+   public void addEtapaProcNacionalizacion(EtapaProcNacionalizacion etapaProcNacionalizacion) {
+      this.etapasProcNacionalizacion.add(etapaProcNacionalizacion);
+      etapaProcNacionalizacion.setProcNac(this);
    }
 
    /**

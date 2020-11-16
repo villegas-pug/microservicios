@@ -2,7 +2,6 @@ package com.commons.utils.models.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,11 +21,16 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "SidtefimEtapaProcNac")
 @Data
-@EqualsAndHashCode(of = { "nIdEtapaProcNac" })
+@EqualsAndHashCode(of = { "idEtapaProcNac" })
 public class EtapaProcNacionalizacion implements Serializable {
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private Long nIdEtapaProcNac;
+   @Column(name = "nIdEtapaProcNac")
+   private Long idEtapaProcNac;
+
+   @ManyToOne(fetch = FetchType.EAGER)
+   @JoinColumn(name = "nIdProcNac", nullable = false)
+   private ProcNacionalizacion procNac;
 
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "nIdEtapa")
@@ -34,14 +38,16 @@ public class EtapaProcNacionalizacion implements Serializable {
 
    @Temporal(TemporalType.TIMESTAMP)
    @DateTimeFormat(pattern = "dd-MM-yyyy")
-   private Date dFechaHoraInicio;
+   @Column(name = "dFechaHoraInicio", nullable = false)
+   private Date fechaHoraInicio;
 
    @Temporal(TemporalType.TIMESTAMP)
    @DateTimeFormat(pattern = "dd-MM-yyyy")
-   private Date dFechaHoraFin;
+   @Column(name = "dFechaHoraFin")
+   private Date fechaHoraFin;
 
    @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "nIdUsrInicia")
+   @JoinColumn(name = "nIdUsrInicia", nullable = false)
    private Usuario usuarioInicia;
 
    @ManyToOne(fetch = FetchType.EAGER)
@@ -52,21 +58,16 @@ public class EtapaProcNacionalizacion implements Serializable {
    @JoinColumn(name = "nIdEtapaAnterior")
    private Etapa etapaAnterior;
 
-   private String sNumeroTramite;
+   @Column(name = "sNumeroTramite", nullable = false)
+   private String numeroTramite;
 
-   @Column(length = 500)
-   private String sObservaciones;
-
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sEstado")
-   private Estado estado;
-
-   private boolean bActivo;
+   @Column(name = "bActivo", nullable = false)
+   private boolean activo;
 
    @PrePersist
    private void prePersist() {
-      this.dFechaHoraInicio = new Date();
-      this.bActivo = true;
+      this.fechaHoraInicio = new Date();
+      this.activo = true;
    }
 
    /**

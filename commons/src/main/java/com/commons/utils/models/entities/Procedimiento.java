@@ -29,8 +29,11 @@ public class Procedimiento implements Serializable {
    @Column(name = "sNombre", nullable = false)
    private String nombre;
 
+   @Column(name = "sComponente", nullable = false)
+   private String componente;
+
    @Column(name = "sIcono", nullable = false)
-   private String icon;
+   private String icono;
 
    @Column(name = "sRuta", nullable = false)
    private String ruta;

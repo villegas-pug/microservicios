@@ -19,7 +19,7 @@ public class Messages {
    /*-> ERROR: */
    public final static String MESSAGGE_ERROR_DATA_ACCESS = "¡Ocurrió un error, contacte a sitemas y proporcione este código %s!";
 
-   /*-> METHOD'S */
+   /*-> -----------------------------METHOD'S--------------------------- */
    /*-> SUCCESS: */
    public static String GET_MESSAGE_SUCCESS_CREATE() {
       return String.format(MESSAGE_SUCCESS_CREATE, System.getProperty("entity"));

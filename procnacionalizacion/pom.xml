@@ -53,6 +53,14 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Cliente Feign -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-openfeign</artifactId>
+			<version>2.2.5.RELEASE</version>
+		</dependency>
+
+
 		<!-- Dependencias: LOG -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>

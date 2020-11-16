@@ -6,26 +6,38 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
-
-import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Data;
 
 @Entity
 @Table(name = "SidtefimTipoTramite")
 @Data
-@EqualsAndHashCode(of = { "nIdTipoTramite" })
+@EqualsAndHashCode(of = { "idTipoTramite" })
 public class TipoTramite implements Serializable {
 
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)
-   @Column(length = 3)
-   private int nIdTipoTramite;
+   @Column(name = "nIdTipoTramite", length = 3)
+   private int idTipoTramite;
 
-   private String sDescripcion;
-   private String sTipo;
-   private boolean bActivo;
-   private String sSigla;
+   @Column(name = "sDescripcion", nullable = false)
+   private String descripcion;
+
+   @Column(name = "sTipo", nullable = false)
+   private String tipo;
+
+   @Column(name = "bActivo", nullable = false)
+   private boolean activo;
+
+   @Column(name = "sSigla", nullable = false)
+   private String sigla;
+
+   @PrePersist
+   private void prePersist() {
+      this.activo = true;
+   }
 
    /**
     *
