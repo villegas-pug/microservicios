@@ -1,6 +1,7 @@
 package com.commons.utils.models.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -37,12 +38,11 @@ public class ProcNacionalizacion implements Serializable {
    @OneToMany(mappedBy = "procNac", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    private List<EtapaProcNacionalizacion> etapasProcNacionalizacion;
 
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "nIdDocumento", nullable = true)
-   private Documento documento;
+   @Column(name = "sDocumento", nullable = true, length = 55)
+   private String documento;
 
    @Column(name = "sNumeroDocumento", nullable = true)
-   private String sNumeroDocumento;
+   private String numeroDocumento;
 
    @Column(name = "sNumeroTramite", length = 15, nullable = false)
    private String numeroTramite;
@@ -71,9 +71,8 @@ public class ProcNacionalizacion implements Serializable {
    @Column(name = "nTelefono", length = 15)
    private Long telefono;
 
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sIdTipoSolicitud", nullable = false)
-   private TipoSolicitud tipoSolicitud;
+   @Column(name = "sIdTipoSolicitud", nullable = false, length = 3)
+   private String tipoSolicitud;
 
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "sIdTipoTramite", nullable = false)
@@ -92,9 +91,8 @@ public class ProcNacionalizacion implements Serializable {
    @Column(name = "dFechaAsignacionTramite")
    private Date fechaAsignacionTramite;
 
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "sEstadoActual", nullable = false)
-   private Estado estadoActual;
+   @Column(name = "sEstado", nullable = false, length = 1)
+   private String estado;
 
    @ManyToOne(fetch = FetchType.EAGER)
    @JoinColumn(name = "nIdEtapaActualProcNac")
@@ -102,6 +100,10 @@ public class ProcNacionalizacion implements Serializable {
 
    @Column(name = "bCompleto")
    private boolean completo;
+
+   public ProcNacionalizacion() {
+      this.etapasProcNacionalizacion = new ArrayList<>();
+   }
 
    @PrePersist
    private void prePersist() {

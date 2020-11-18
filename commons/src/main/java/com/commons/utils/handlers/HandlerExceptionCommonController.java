@@ -23,7 +23,7 @@ public class HandlerExceptionCommonController extends ResponseEntityExceptionHan
    }
 
    /* » Handle Custom Exceptión... */
-   @ExceptionHandler(value = { DataAccessEmptyWarning.class })
+   @ExceptionHandler({ DataAccessEmptyWarning.class })
    @ResponseStatus(HttpStatus.OK)
    protected Response handlerNotFound(DataAccessEmptyWarning e) {
       String idLog = LogAndResponseHandler.getIdLog();

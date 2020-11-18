@@ -22,7 +22,7 @@ public class ProcNacionalizacionService implements IProcNacionalizacionService {
    @Override
    @Transactional(readOnly = true)
    public List<ProcNacionalizacion> findAll() {
-      return null;
+      return repository.findAll();
    }
 
    @Override
