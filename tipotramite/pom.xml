@@ -66,6 +66,14 @@
 			<version>2.6.1</version>
 		</dependency>
 
+		<!-- Report's -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.16.0</version>
+		</dependency>
+
+
 		<!-- Dependencia: COMMON'S  -->
 		<dependency>
 			<groupId>com.commons</groupId>

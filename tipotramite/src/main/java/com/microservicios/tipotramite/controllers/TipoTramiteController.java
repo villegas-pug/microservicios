@@ -1,6 +1,8 @@
 package com.microservicios.tipotramite.controllers;
 
+import java.io.IOException;
 import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 import com.commons.utils.constants.Messages;
 import com.commons.utils.errors.DataAccessEmptyWarning;
 import com.commons.utils.models.entities.TipoTramite;
@@ -11,7 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @CrossOrigin(origins = { "*" }, allowedHeaders = { "*" })
 @RestController
@@ -36,4 +40,8 @@ public class TipoTramiteController {
       return microservicio;
    }
 
+   @GetMapping(path = "/rpt/{id}")
+   public String generateRpt(@PathVariable int id, HttpServletResponse response) throws JRException, IOException {
+      return service.generateRpt(id, response);
+   }
 }

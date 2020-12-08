@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface TipoTramiteRepository extends JpaRepository<TipoTramite, Long> {
+public interface TipoTramiteRepository extends JpaRepository<TipoTramite, Integer> {
 
 }

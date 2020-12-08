@@ -1,9 +1,11 @@
 package com.microservicios.tipotramite.services;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
-
+import javax.servlet.http.HttpServletResponse;
 import com.commons.utils.models.entities.TipoTramite;
+import net.sf.jasperreports.engine.JRException;
 
 public interface ITipoTramiteService {
    List<TipoTramite> findAll();
@@ -17,4 +19,6 @@ public interface ITipoTramiteService {
    void delete(TipoTramite entity);
 
    void deleteById(Long id);
+
+   String generateRpt(int id, HttpServletResponse response) throws JRException, IOException;
 }
