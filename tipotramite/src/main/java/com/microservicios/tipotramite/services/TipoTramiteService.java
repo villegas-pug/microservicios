@@ -66,19 +66,26 @@ public class TipoTramiteService implements ITipoTramiteService {
    @Override
    public String generateRpt(int id, HttpServletResponse response) throws JRException, IOException {
 
+      /*-> fichero `*.jpxml` */
+      File file = ResourceUtils.getFile("classpath:reports/RptTest.jrxml");
+
+      /*-> Compilado del fichero `*.jpxml` */
+      JasperReport jpRpt = JasperCompileManager.compileReport(file.getAbsolutePath());
+
+      /*-> JR-Datasource... */
       List<TipoTramite> tipoTramiteDb = new ArrayList<>();
       tipoTramiteDb.add(repository.findById(id).get());
-
-      File file = ResourceUtils.getFile("classpath:RptTest.jrxml");
-
-      JasperReport jpRpt = JasperCompileManager.compileReport(file.getAbsolutePath());
       JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(tipoTramiteDb);
 
+      /*-> Suministrar al informe: */
       JasperPrint jpPrint = JasperFillManager.fillReport(jpRpt, null, ds);
 
-      response.setContentType("application/x-pdf");
-      final OutputStream output = response.getOutputStream();
+      /*-> Configuración: object-response */
+      response.setContentType("application/pdf");
+      response.setHeader("Content-Disposition", "filename=test.pdf");
+      OutputStream output = response.getOutputStream();
 
+      /*-> */
       JasperExportManager.exportReportToPdfStream(jpPrint, output);
 
       return "Reporte generado exitosamente!!!";
