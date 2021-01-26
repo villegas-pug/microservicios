@@ -15,14 +15,14 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 public class HandlerExceptionCommonController extends ResponseEntityExceptionHandler {
 
-   /* » Handle Internal Exceptión... */
+   /* » Handler: Internal Exceptión... */
    @Override
    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
          HttpStatus status, WebRequest request) {
       return new ResponseEntity<>(getResponseException(status, ex), status);
    }
 
-   /* » Handle Custom Exceptión... */
+   /* » Handler: Custom Exceptión... */
    @ExceptionHandler({ DataAccessEmptyWarning.class })
    @ResponseStatus(HttpStatus.OK)
    protected Response handlerNotFound(DataAccessEmptyWarning e) {
@@ -47,9 +47,12 @@ public class HandlerExceptionCommonController extends ResponseEntityExceptionHan
       return LogAndResponseHandler.getLogAndResponse(idLog, msjResponse, e.getMessage(), e.toString());
    }
 
+   // #region Métodos privados
    private Response getResponseException(HttpStatus status, Exception ex) {
       String idLog = LogAndResponseHandler.getIdLog();
       String msjResponse = Messages.GET_MESSAGGE_ERROR_DATA_ACCESS(idLog);
       return LogAndResponseHandler.getLogAndResponse(idLog, msjResponse, ex.getMessage(), status.getReasonPhrase());
    }
+   // #endregion
+
 }
