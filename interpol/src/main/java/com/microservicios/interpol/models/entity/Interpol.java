@@ -10,12 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "SidInterpol")
+@Table(name = "sid_interpol")
 @Data
 @EqualsAndHashCode(of = { "idInterpol" })
 public class Interpol implements Serializable {
@@ -25,11 +24,11 @@ public class Interpol implements Serializable {
    @Column(name = "nIdInterpol")
    private Long idInterpol;
 
-   @Column(name = "sOrigen", length = 55)
-   private String origen;
-
-   @Column(name = "sNombres", length = 255)
+   @Column(name = "sNombres", length = 55)
    private String nombres;
+
+   @Column(name = "sApellidos", length = 55)
+   private String apellidos;
 
    @Column(name = "sSexo", length = 10)
    private String sexo;
@@ -44,7 +43,7 @@ public class Interpol implements Serializable {
    private String nacionalidad;
 
    @Temporal(TemporalType.DATE)
-   @DateTimeFormat(pattern = "dd-MM-yyyy")
+   /* @DateTimeFormat(pattern = "dd-MM-yyyy") */
    @Column(name = "dFechaEmision")
    private Date fechaEmision;
 
@@ -53,6 +52,12 @@ public class Interpol implements Serializable {
 
    @Column(name = "sMotivo", length = 15)
    private String motivo;
+
+   @Column(name = "sProcedencia", length = 50)
+   private String procedencia;
+
+   @Column(name = "sSede", length = 25)
+   private String sede;
 
    /**
    *
