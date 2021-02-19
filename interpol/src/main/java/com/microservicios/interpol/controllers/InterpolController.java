@@ -6,7 +6,7 @@ import com.commons.utils.controllers.CommonController;
 import com.commons.utils.errors.DataAccessEmptyWarning;
 import com.commons.utils.utils.Response;
 import com.microservicios.interpol.models.entity.Interpol;
-import com.microservicios.interpol.services.IInterpolService;
+import com.microservicios.interpol.services.InterpolService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = { "*" })
 @RestController
-public class InterpolController extends CommonController<Interpol, IInterpolService> {
+public class InterpolController extends CommonController<Interpol, InterpolService> {
 
    @PostMapping(path = "/findByApprox")
    public ResponseEntity<?> findByAppox(@RequestBody Interpol interpol) {

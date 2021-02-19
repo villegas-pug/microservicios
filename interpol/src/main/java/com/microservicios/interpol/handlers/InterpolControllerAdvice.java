@@ -1,10 +1,9 @@
-package com.microservicios.pais.handlers;
+package com.microservicios.interpol.handlers;
 
 import com.commons.utils.handlers.CommonControllerAdv;
-
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @RestControllerAdvice
-public class HandlerException extends CommonControllerAdv {
+public class InterpolControllerAdvice extends CommonControllerAdv {
 
 }

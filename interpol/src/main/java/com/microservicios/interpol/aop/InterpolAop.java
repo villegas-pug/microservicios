@@ -1,12 +1,11 @@
-package com.microservicios.pais.aop;
+package com.microservicios.interpol.aop;
 
 import com.commons.utils.aop.CommonAop;
-
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class HandlerAop extends CommonAop {
+public class InterpolAop extends CommonAop {
 
 }
