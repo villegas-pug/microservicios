@@ -16,7 +16,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Data;
 
 @Entity
-@Table(name = "SidtefimUsuarioProcedimiento", uniqueConstraints = @UniqueConstraint(columnNames = { "sLogin",
+@Table(name = "SidUsuarioProcedimiento", uniqueConstraints = @UniqueConstraint(columnNames = { "sLogin",
       "nIdProcedimiento" }))
 @Data
 public class UsuarioProcedimiento implements Serializable {

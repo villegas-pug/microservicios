@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "SidtefimUsuario")
+@Table(name = "SidUsuario")
 @Data
 @EqualsAndHashCode(of = { "login" })
 public class Usuario implements Serializable {

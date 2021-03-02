@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @Entity
-@Table(name = "SidtefimDocumento")
+@Table(name = "SidDocumento")
 @Data
 @EqualsAndHashCode(of = { "idDocumento" })
 public class Documento implements Serializable {

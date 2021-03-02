@@ -1,32 +1,44 @@
 package com.commons.utils.models.entities;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "SidtefimPais")
+@Table(name = "SidPais")
 @Data
 @EqualsAndHashCode(of = { "idPais" })
+@AllArgsConstructor
+@NoArgsConstructor
 public class Pais implements Serializable {
 
    @Id
-   @Column(name = "sIdPais")
-   private String idPais;
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
+   @Column(name = "nIdPais")
+   private Long idPais;
 
-   @Column(name = "sNombre", nullable = false)
+   @Column(name = "sNombre", length = 55, nullable = false)
    private String nombre;
 
-   @Column(name = "sNacionalidad", nullable = false)
+   @Column(name = "sNacionalidad", length = 55, nullable = false)
    private String nacionalidad;
 
    @Column(name = "bActivo", nullable = false)
    private boolean activo;
+
+   @PrePersist
+   private void prePersist() {
+      this.activo = true;
+   }
 
    /**
     *
